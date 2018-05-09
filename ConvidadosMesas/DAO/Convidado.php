@@ -10,33 +10,22 @@ class Convidado extends DAO {
         $sql->execute();
         return $sql->fetchAll();
     }
-    
-    
+  
     public function findAllConf() {
         $sql = $this->db->prepare("SELECT * FROM convidado where status=1 ORDER BY nome");
         $sql->execute();
         return $sql->fetchAll();
-        
-        
-        
+             
     }
-    
-    
-    
+
     public function findAllConvSemMesa() {
         $sql = $this->db->prepare("SELECT * FROM convidado where status=1 ORDER BY nome");
         $sql->execute();
-        return $sql->fetchAll();
-        
+        return $sql->fetchAll(); 
         $Montagem = new Montagem;
         // Ainda não sei como fazer
-        
-        
-        
+    
     }
-    
-    
-    
     
 
     public function findByNome($q) {
@@ -49,6 +38,7 @@ class Convidado extends DAO {
         return $sql->fetchAll();
     }
 
+    
     public function findByCod($cod) {
         $sql = $this->db->prepare("SELECT * "
                 . " FROM convidado"
@@ -56,7 +46,23 @@ class Convidado extends DAO {
 
         $sql->execute([':cod' => $cod]);
         return $sql->fetch();
+        
+        
+        
     }
+    
+    
+    public function findByCod1($cod) {
+        $sql = $this->db->prepare("SELECT * "
+                . " FROM convidado"
+                . " WHERE idconvidado=:cod");
+
+        $sql->execute([':cod' => $cod]);
+       //return $sql->;
+        return $sql->fetch();
+    }
+    
+    
 
     public function insert($nome, $email, $telefone, $ladofamilia, $status) {
         $sql = $this->db->prepare("INSERT INTO convidado "

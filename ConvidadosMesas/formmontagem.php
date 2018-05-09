@@ -14,6 +14,7 @@ $acao = $_GET["acao"] ?? "";
 if ($acao == 'incluir' && isset($_POST['salvar'])) {
     $idmesa= $_POST['idmesa'];
     $idconvidado = $_POST['idconvidado'];
+   
     $montagem->findAll();
     
     foreach ($montagem->findAll() as $cat) {
@@ -25,9 +26,16 @@ if ($acao == 'incluir' && isset($_POST['salvar'])) {
     if ($montagem->insert($idmesa, $idconvidado)) {
         header('Location: Tabela_montagem.php');
         exit();
-    }else{
         
-        echo 'O convidado '. $idconvidado .'ja está acomodado em uma mesa ';
+    }else{
+        $cod=$idconvidado;
+        $convidado->findByCod1($cod);
+        //print_r($convidado);
+        //echo $convidado;
+       
+        
+        
+        echo '<h1> O convidado '.  $idconvidado  .' ja está acomodado em uma mesa </h1>';
     }
   
     
