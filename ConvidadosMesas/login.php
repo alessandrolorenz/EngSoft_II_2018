@@ -42,6 +42,7 @@ if (isset($_POST["entrar"])) {
                     <div class="form-group">
                         <input type="submit" name="entrar" value="Entrar" class="btn btn-primary btn-block">
                     </div>
+                    <a href="index.php">Cancela</a>
                 </form>       
             </div>
         </div>
