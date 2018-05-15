@@ -62,12 +62,12 @@ if (isset($_POST["delete"])) {
             <h3>TABELA DE MONTAGEM DE MESAS</h3>
             <form method="get" class="form-inline" style="margin-bottom: 10px">
                 <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Pesquisar" name="q" value="<?php echo $q; ?>">
-                    <span class="input-group-btn">
+                    <!--<input class="form-control" type="text" placeholder="Pesquisar" name="q" value="<?php echo $q; ?>">-->
+<!--                    <span class="input-group-btn">
                         <button type="submit" class="btn btn-default" for="q">
                             <span class="glyphicon glyphicon-search"></span>
                         </button> 
-                    </span>
+                    </span>-->
                 </div>
                 <a href="<?php echo $q; ?>formmontagem.php?acao=incluir" class="btn btn-success">
                     <span class="glyphicon glyphicon-plus"></span>

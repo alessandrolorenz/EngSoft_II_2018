@@ -49,7 +49,18 @@
         </nav>
            
             <h1>Seja Bem Vindo</h1>
-            <h2><a href="cadastro.php">Auto Cadastro</a></h2>
+            
+            <?php
+             //session_start();
+                    if (isset($_SESSION["login"])) {
+                        echo '<h1>Já é possível fazer manutenção nos cadastros</h1>';
+                    } else {
+                        echo '<h2><a href="cadastro.php">Auto Cadastro</a></h2>';
+                        //echo '<li><a href="login.php">Login</a></li>';
+                    }
+            
+            ?>
+            <!--<h2><a href="cadastro.php">Auto Cadastro</a></h2>-->
 
             
             
