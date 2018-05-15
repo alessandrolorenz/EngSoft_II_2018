@@ -95,10 +95,10 @@ if (isset($_POST["delete"])) {
                     foreach ($tabela as $linha) {
                         echo '<tr>'
                         . '<td class="text-center">' 
-                        . $linha['idmesa']
+                        . $linha['idmontagem']
                         . '</td>'
                         . '<td><a href="formmontagem.php?acao=editar&cod='
-                        . $linha['idmesa']
+                        . $linha['idmontagem']
                         . '">'
                         . $linha['mesanumero']
                         . '</a></td>'

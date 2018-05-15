@@ -43,15 +43,25 @@ if ($acao == 'incluir' && isset($_POST['salvar'])) {
 
 
 if ($acao == 'editar' && isset($_POST['salvar'])) {
+    
     if ($montagem->update($_GET['cod'], $_POST['idmesa'], $_POST['idconvidado'])) {
         header('Location: Tabela_montagem.php');
         exit();
+    }else{
+        //echo '<h1> Deu ruim no update </h1> ' . $_GET['cod'];
+        echo '<h1> O convidado '.  $_POST['idconvidado']  .' ja está acomodado em uma mesa </h1>';
     }
 }
 
 if ($acao == 'editar' && isset($_GET['cod'])) {
     $linha = $montagem->findByCod($_GET['cod']);
-}
+}else{
+        
+    //echo '<h1> Deu ruim no find </h1> ';
+    }
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -100,6 +110,8 @@ if ($acao == 'editar' && isset($_GET['cod'])) {
         </h3>
         
         <form method="post" class="form-horizontal">
+            
+            
   
             
             <div class="form-group">

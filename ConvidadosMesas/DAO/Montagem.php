@@ -5,7 +5,7 @@ require_once 'DAO.php';
 class Montagem extends DAO {
 
     public function findAll() {
-        $sql = $this->db->prepare("SELECT mesaconvidado.idmesa, mesa.mesanumero, convidado.nome, mesa.descricao, convidado.idconvidado FROM mesaconvidado INNER JOIN mesa ON mesa.idmesa=mesaconvidado.idmesa INNER JOIN convidado on mesaconvidado.idconvidado=convidado.idconvidado ORDER BY idmesa");
+        $sql = $this->db->prepare("SELECT mesaconvidado.idmontagem, mesaconvidado.idmesa, mesa.mesanumero, convidado.nome, mesa.descricao, convidado.idconvidado FROM mesaconvidado INNER JOIN mesa ON mesa.idmesa=mesaconvidado.idmesa INNER JOIN convidado on mesaconvidado.idconvidado=convidado.idconvidado ORDER BY idmesa");
         $sql->execute();
         return $sql->fetchAll();
     }
@@ -40,7 +40,7 @@ class Montagem extends DAO {
     public function findByCod($cod) {
         $sql = $this->db->prepare("SELECT * "
                 . " FROM mesaconvidado"
-                . " WHERE idmesa=:cod");
+                . " WHERE idmontagem=:cod");
 
         $sql->execute([':cod' => $cod]);
         return $sql->fetch();
@@ -62,7 +62,7 @@ class Montagem extends DAO {
         $sql = $this->db->prepare("UPDATE mesaconvidado "
                 . " SET idmesa=:idmesa, "
                 . " idconvidado=:idconvidado "
-                . " WHERE idmesa=:cod");
+                . " WHERE idmontagem=:cod");
 
         return $sql->execute([
                     ':cod' => $cod,
