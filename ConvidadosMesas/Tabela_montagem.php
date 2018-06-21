@@ -13,7 +13,14 @@ if (isset($_POST["delete"])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+    
     <head>
+        
+        
+        
+        
+        
+        
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,6 +33,9 @@ if (isset($_POST["delete"])) {
         <!--<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.css">-->
         <!--<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>-->
 
+
+        
+        
     </head>
     
     <body>
@@ -38,10 +48,10 @@ if (isset($_POST["delete"])) {
             </div>
             <ul class="nav navbar-nav">
                 <!--<li class="active"><a href="index.php">Home</a></li>-->
-              <li><a href="Tabela_convidado.php">Convidados</a></li>
-              <li><a href="Tabela_mesas.php">Mesas</a></li>
-              <li><a href="Tabela_montagem.php">Montagem de mesas</a></li>
-              <li><a href="Tabela_Consulta_Convidados.php">Consulta</a></li>
+              <li><a href="Tabela_convidado.php" data-toggle="tooltip" title="CLIQUE PARA ACESSAR A LISTA DE CONVIDADOS">Convidados</a></li>
+              <li><a href="Tabela_mesas.php" data-toggle="tooltip" title="CLIQUE PARA ACESSAR A LISTA DE MESAS">Mesas</a></li>
+              <li><a href="Tabela_montagem.php" data-toggle="tooltip" title="CLIQUE PARA ACESSAR A LISTA DE MONTAGEM DE MESA">Montagem de mesas</a></li>
+              <li><a href="Tabela_Consulta_Convidados.php" data-toggle="tooltip" title="CLIQUE PARA CONSULTAR MONTAGEM">Consulta</a></li>
             </ul>
               <ul class="nav navbar-nav navbar-right">
                     <?php
@@ -69,7 +79,7 @@ if (isset($_POST["delete"])) {
                         </button> 
                     </span>-->
                 </div>
-                <a href="<?php echo $q; ?>formmontagem.php?acao=incluir" class="btn btn-success">
+                <a data-toggle="tooltip" title="CLIQUE PARA INSERIR UM CONVIDADO À MESA" href="<?php echo $q; ?>formmontagem.php?acao=incluir" class="btn btn-success">
                     <span class="glyphicon glyphicon-plus"></span>
                     Montagem em mesas
                 </a>
@@ -97,7 +107,7 @@ if (isset($_POST["delete"])) {
                         . '<td class="text-center">' 
                         . $linha['idmontagem']
                         . '</td>'
-                        . '<td><a href="formmontagem.php?acao=editar&cod='
+                        . ' <td class="text-center"> <a  data-toggle="tooltip" title="CLIQUE NO NÚMERO DA MESA PARA EDITAR A MONTAGEM" href="formmontagem.php?acao=editar&cod='
                         . $linha['idmontagem']
                         . '">'
                         . $linha['mesanumero']
@@ -113,7 +123,7 @@ if (isset($_POST["delete"])) {
                                 
                         
                                     
-                        . '<td class="text-center">'
+                        . '<td class="text-center" data-toggle="tooltip" title="CLIQUE  PARA EXCLUIR">'
                         . '<button type="submit" class="btn btn-link" name="delete" value="'
                         . $linha['idconvidado']
                         . '" onclick="return confirm(\'Deseja realmente excluir?\')">'
@@ -126,6 +136,11 @@ if (isset($_POST["delete"])) {
                 </form>
                 </tbody>
             </table>
+            
+            
+<div class="tooltip">Hover over me
+  <span class="tooltiptext">Tooltip text</span>
+</div>
      
         </div>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

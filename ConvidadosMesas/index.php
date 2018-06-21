@@ -27,10 +27,12 @@
             </div>
             <ul class="nav navbar-nav">
                 <!--<li class="active"><a href="index.php">Home</a></li>-->
-              <li><a href="Tabela_convidado.php">Convidados</a></li>
-              <li><a href="Tabela_mesas.php">Mesas</a></li>
-              <li><a href="Tabela_montagem.php">Montagem de mesas</a></li>
-              <li><a href="Tabela_Consulta_Convidados.php">Consulta</a></li>
+               <ul class="nav navbar-nav">
+                <!--<li class="active"><a href="index.php">Home</a></li>-->
+              <li><a href="Tabela_convidado.php" data-toggle="tooltip" title="CLIQUE PARA ACESSAR A LISTA DE CONVIDADOS">Convidados</a></li>
+              <li><a href="Tabela_mesas.php" data-toggle="tooltip" title="CLIQUE PARA ACESSAR A LISTA DE MESAS">Mesas</a></li>
+              <li><a href="Tabela_montagem.php" data-toggle="tooltip" title="CLIQUE PARA ACESSAR A LISTA DE MONTAGEM DE MESA">Montagem de mesas</a></li>
+              <li><a href="Tabela_Consulta_Convidados.php" data-toggle="tooltip" title="CLIQUE PARA CONSULTAR MONTAGEM">Consulta</a></li>
             </ul>
               <ul class="nav navbar-nav navbar-right">
                     <?php

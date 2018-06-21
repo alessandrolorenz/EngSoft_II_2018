@@ -34,7 +34,6 @@ if ($acao == 'incluir' && isset($_POST['salvar'])) {
         //echo $convidado;
        
         
-        
         echo '<h1> O convidado '.  $idconvidado  .' ja está acomodado em uma mesa </h1>';
     }
   
@@ -104,15 +103,11 @@ if ($acao == 'editar' && isset($_GET['cod'])) {
           </div>
         </nav>
         
-        
         <h3>
             <?php echo ($acao == "incluir" ? "Novo Montagem" : "Alterar Montagem") ?>
         </h3>
         
         <form method="post" class="form-horizontal">
-            
-            
-  
             
             <div class="form-group">
                 <label class="control-label">
@@ -141,10 +136,8 @@ if ($acao == 'editar' && isset($_GET['cod'])) {
                 <label class="control-label">
                     Convidado
                 </label>
+                
                 <?php
-                
-                
-                
                 
                 ?>
                 
