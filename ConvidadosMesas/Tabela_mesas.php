@@ -3,10 +3,10 @@ require_once './autentica.php';
 
 $q = (isset($_GET["q"]) ? $_GET["q"] : "");
 require_once 'DAO/Mesa.php';
-$mesa = new Mesa();
+$montagem = new Mesa();
 
 if (isset($_POST["delete"])) {
-    $mesa->delete($_POST["delete"] );
+    $montagem->delete($_POST["delete"] );
 }
 ?>
 <!DOCTYPE html>
@@ -91,22 +91,22 @@ if (isset($_POST["delete"])) {
                 <tbody>
                 <form  method="post">
                     <?php
-                    $tabela = $mesa->findById($q);
+                    $tabela = $montagem->findById($q);
 
                     foreach ($tabela as $linha) {
                         echo '<tr>'
                         . '<td class="text-center">' 
                         . $linha['idmesa']
                         . '</td>'
-                        . '<td><a href="formmesa.php?acao=editar&cod='
+                        . '<td class="text-center" ><a href="formmesa.php?acao=editar&cod='
                         . $linha['idmesa']
-                        . '">'
+                        . '">Mesa '
                         . $linha['mesanumero']
                         . '</a></td>'
                         . '<td class="text-right">  '
                         . $linha['descricao']
                         . '</td>'
-                        . '<td class="text-right">  '
+                        . '<td class="text-center">  '
                         . $linha['numerodelugares']
                         . '</td>'    
                         . '<td class="text-center">'

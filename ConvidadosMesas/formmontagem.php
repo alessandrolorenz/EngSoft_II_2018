@@ -17,11 +17,9 @@ if ($acao == 'incluir' && isset($_POST['salvar'])) {
    
     $montagem->findAll();
     
-    foreach ($montagem->findAll() as $cat) {
     
-    }
     
- 
+    
     
     if ($montagem->insert($idmesa, $idconvidado)) {
         header('Location: Tabela_montagem.php');
@@ -34,8 +32,14 @@ if ($acao == 'incluir' && isset($_POST['salvar'])) {
         //echo $convidado;
        
         
-        echo '<h1> O convidado '.  $idconvidado  .' ja está acomodado em uma mesa </h1>';
+        echo '<h1> O convidado '.  $idconvidado . $convidado  .' ja está acomodado em uma mesa </h1>';
     }
+    
+    
+    
+    
+    
+    
   
     
 }
@@ -71,7 +75,11 @@ if ($acao == 'editar' && isset($_GET['cod'])) {
         <title>Montagem</title>
 
         <link href="css/bootstrap.min.css" rel="stylesheet">
-        
+        <!-- DataTables-->
+        <link href="plugins/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
+        <!--<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.css">-->
+        <!--<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>-->
+
         
         
     </head>
@@ -110,21 +118,33 @@ if ($acao == 'editar' && isset($_GET['cod'])) {
         <form method="post" class="form-horizontal">
             
             <div class="form-group">
+               
                 <label class="control-label">
                     Numero da mesa
                 </label>
                 <select name="idmesa" required="" class="form-control">
+                    
+                  
+                   
                     <option value="">Selecione a mesa</option>
+                    
                     <?php
+                    
+                    
                     foreach ($mesa->findAll() as $cat) {
                         echo '<option '
                         . ($linha['idmesa'] == $cat['idmesa'] ? " selected " : "")
                         . ' value="'
                         . $cat['idmesa']
                         . '">'
-                        . $cat['mesanumero']
+                        .  "Mesa Número: <h1>" . $cat['mesanumero'] .  "</h1> Número de Lugares: " . $cat['numerodelugares'] . "     - Convidados na mesa: " . $montagem->findCountConvidado($idmesa=$cat['idmesa']) 
+                        . ($montagem->findCountConvidado($idmesa=$cat['idmesa']) < $cat['numerodelugares'] ? " [Mesa Disponivel] " : " [Mesa cheia (cuide para não exceder o numero de lugares)]")
+                                
+                                // . ($acao == "incluir" ? "Novo Montagem" : "Alterar Montagem")  
+                        
                         . '</option>';
                        }
+                       
                     ?>
                     
                 </select>
@@ -146,10 +166,28 @@ if ($acao == 'editar' && isset($_GET['cod'])) {
                     <option value="">Selecione o convidado</option>
                     
                         <?php
-                    $montagem->findAll();
+                    $mont = $montagem->findAll();
+
+                if ($acao == 'editar'){
                     
-                    foreach ($convidado->findAllConf() as $cat) {
                         
+                        //echo "<p>Disponíveis</p>";
+                       
+                       foreach ($convidado->findAllNaoContendo() as $cat) {   
+                            echo
+   
+                        '<option '
+                        . ($linha['idconvidado'] == $cat['idconvidado'] ? " selected " : "")
+                        . ' value="'
+                         . $cat['idconvidado']
+                       
+                        . '"> - Convidado Disponivel:  ' 
+                        .  $cat['nome']        
+                        
+                        . '</option>';
+                       
+                       }
+                       foreach ($convidado->findAll() as $cat) {            
                         echo
    
                         '<option '
@@ -157,16 +195,55 @@ if ($acao == 'editar' && isset($_GET['cod'])) {
                         . ' value="'
                         . $cat['idconvidado']
                         . '">'
-                                
+                        .  $cat['nome'] . " -INDISPONÍVEL"
+                        //. ($montagem->findByConv($idconvidado=$linha['idconvidado']) == $cat['idconvidado'] ? " selected " : "gfd")
                         
-                        .  $cat['nome']
                         . '</option>';
-                        
-                        
-                        
-                       }
+                       
+                            
+   
+                        }
                        
                        
+                       
+                    
+                    } else {
+                        
+                            foreach ($convidado->findAllNaoContendo() as $cat) {   
+                            echo
+   
+                        '<option '
+                        . ($linha['idconvidado'] == $cat['idconvidado'] ? " selected " : "")
+                        . ' value="'
+                         . $cat['idconvidado']
+                       
+                        . '"> - Convidado disponivel:  ' 
+                        .  $cat['nome']        
+                        
+                        . '</option>';
+                            
+   
+                        }
+        
+                    }
+//                    foreach ($convidado->findAllNaoContendo() as $cat) {            
+//                        echo
+//   
+//                        '<option '
+//                        . ($linha['idconvidado'] == $cat['idconvidado'] ? " selected " : "")
+//                        . ' value="'
+//                        . $cat['idconvidado']
+//                        . '">'
+//                        .  $cat['nome']        
+//                        
+//                        // . ($cat['nome'] == "" ? " Todos os convidados foram selecionados " : $cat['nome'])
+//                        . '</option>';
+//                        
+//                        
+//                        
+//                       }
+                    
+      
                     ?>
                     
                 </select>
@@ -181,9 +258,28 @@ if ($acao == 'editar' && isset($_GET['cod'])) {
                 </button>
             </div>
         </form>
+        
+        
+        
+        
+        
+        
+        
+        
+        
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="js/bootstrap.min.js"></script>
+        <!--DataTables-->
+        <script src="plugins/jquery-1.12.4.js" type="text/javascript"></script>
+        <script src="plugins/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script>
+            $(document).ready(function() {
+                $('#example').DataTable();
+            } );
+        </script>
+               
+        
     </body>
 </html>

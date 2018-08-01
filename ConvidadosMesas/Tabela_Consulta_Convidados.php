@@ -3,13 +3,11 @@
 
 $q = (isset($_GET["q"]) ? $_GET["q"] : "");
 require_once 'DAO/Montagem.php';
-$mesa = new Montagem();
+$montagem = new Montagem();
 
 
 
-if (isset($_POST["delete"])) {
-    $mesa->delete( $_POST["delete"] );
-}
+
 ?>
 
 
@@ -65,15 +63,15 @@ if (isset($_POST["delete"])) {
                 <form method="post">
                     <?php
                     //$tabela = $mesa->findByNome($q);
-                    $tabela = $mesa->findAll();
+                    $tabela = $montagem->findAll();
                     
                     foreach ($tabela as $linha) {
                         echo '<tr>'
-                        . '<td class="text-right">  '
+                        . '<td class="text-center">  '
                         . $linha['nome']
                         . '</td>'
                                 
-                        . '<td>'
+                        . '<td class="text-center">Mesa '
                         . $linha['mesanumero']
                         . '</a></td>'
                               

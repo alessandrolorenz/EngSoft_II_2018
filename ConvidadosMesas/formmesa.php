@@ -3,7 +3,7 @@ require_once './autentica.php';
 require_once 'DAO/Mesa.php';
 //require_once 'DAO/Categorias.php';
 
-$mesa = new Mesa();
+$montagem = new Mesa();
 //$categorias = new Categorias();
 
 $acao = $_GET["acao"] ?? "";
@@ -13,7 +13,7 @@ if ($acao == 'incluir' && isset($_POST['salvar'])) {
     $descricao = $_POST['descricao'];
     echo $mesanumero.$numerodelugares.$descricao;
     
-    if ($mesa->insert($mesanumero, $numerodelugares, $descricao)) {
+    if ($montagem->insert($mesanumero, $numerodelugares, $descricao)) {
         header('Location: Tabela_mesas.php');
         exit();
     }
@@ -24,14 +24,14 @@ if ($acao == 'editar' && isset($_POST['salvar'])) {
     $numerodelugares = $_POST['numerodelugares'];
     $descricao = $_POST['descricao'];
     echo $mesanumero.$numerodelugares.$descricao;
-    if ($mesa->update($_GET['cod'], $_POST['mesanumero'], $_POST['numerodelugares'], $_POST['descricao'])) {
+    if ($montagem->update($_GET['cod'], $_POST['mesanumero'], $_POST['numerodelugares'], $_POST['descricao'])) {
         header('Location: Tabela_mesas.php');
         exit();
     }
 }
 
 if ($acao == 'editar' && isset($_GET['cod'])) {
-    $linha = $mesa->findByCod($_GET['cod']);
+    $linha = $montagem->findByCod($_GET['cod']);
 }
 ?>
 <!DOCTYPE html>

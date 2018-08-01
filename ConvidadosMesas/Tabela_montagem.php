@@ -3,24 +3,19 @@ require_once './autentica.php';
 
 $q = (isset($_GET["q"]) ? $_GET["q"] : "");
 require_once 'DAO/Montagem.php';
-$mesa = new Montagem();
+$montagem = new Montagem();
 
 
 
 if (isset($_POST["delete"])) {
-    $mesa->delete( $_POST["delete"] );
+    $montagem->delete( $_POST["delete"] );
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
     
     <head>
-        
-        
-        
-        
-        
-        
+  
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -81,14 +76,17 @@ if (isset($_POST["delete"])) {
                 </div>
                 <a data-toggle="tooltip" title="CLIQUE PARA INSERIR UM CONVIDADO À MESA" href="<?php echo $q; ?>formmontagem.php?acao=incluir" class="btn btn-success">
                     <span class="glyphicon glyphicon-plus"></span>
-                    Montagem em mesas
+                    Montagem de mesas
                 </a>
             </form>
             <table class="table table-bordered table-hover">
                 <thead>
+                    <?php
+                    $tabela = $montagem->findAll();
+                    ?>
                     <tr>
-                        <th class="text-center">Código</th>
-                        <th class="text-center">Número da mesa</th>
+                        <!--<th class="text-center">Código</th>-->
+                        <th class="text-center">Número da mesa </th>
                         <th class="text-center">Nome do convidado</th>
                         <th class="text-center">Descrição da Mesa</th>
                         
@@ -100,24 +98,24 @@ if (isset($_POST["delete"])) {
                 <form method="post">
                     <?php
                     //$tabela = $mesa->findByNome($q);
-                    $tabela = $mesa->findAll();
                     
+                    $testa="";
                     foreach ($tabela as $linha) {
                         echo '<tr>'
-                        . '<td class="text-center">' 
+                        . '<!--<td class="text-center">' 
                         . $linha['idmontagem']
-                        . '</td>'
-                        . ' <td class="text-center"> <a  data-toggle="tooltip" title="CLIQUE NO NÚMERO DA MESA PARA EDITAR A MONTAGEM" href="formmontagem.php?acao=editar&cod='
+                        . '</td>-->'
+                        . ' <td '. ($linha['mesanumero'] === $testa ?  "bgcolor='#F1F1F1'" : "") .' class="text-center"> <a  data-toggle="tooltip" title="CLIQUE NO NÚMERO DA MESA PARA EDITAR A MONTAGEM" href="formmontagem.php?acao=editar&cod='
                         . $linha['idmontagem']
-                        . '">'
-                        . $linha['mesanumero']
+                        . '">Mesa '
+                        . $linha['mesanumero'] 
                         . '</a></td>'
                         
-                        . '<td class="text-right">  '
+                        . '<td '. ($linha['mesanumero'] === $testa ?  "bgcolor='#F2F2F2'" : "") .' class="text-right">  '
                         . $linha['nome']
                         . '</td>'     
                         
-                        . '<td class="text-right">  '
+                        . '<td '. ($linha['mesanumero'] === $testa ?  "bgcolor='#F2F2F2'" : "") .' class="text-right">  '
                         . $linha['descricao']
                         . '</td>'
                                 
@@ -131,6 +129,8 @@ if (isset($_POST["delete"])) {
                         . '</button>'
                         . '</td>'
                         . '</tr>' . "\n";
+                        $testa=$linha['mesanumero'];
+                        
                     }
                     ?>
                 </form>

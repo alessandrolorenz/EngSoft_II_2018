@@ -17,6 +17,14 @@ class Convidado extends DAO {
         return $sql->fetchAll();
              
     }
+    
+    
+    
+    public function findAllNaoContendo() {
+        $sql = $this->db->prepare("SELECT * FROM convidado e WHERE e.idconvidado NOT IN(SELECT mesaconvidado.idconvidado FROM mesaconvidado)");
+        $sql->execute();
+        return $sql->fetchAll();
+    }
 
     public function findAllConvSemMesa() {
         $sql = $this->db->prepare("SELECT * FROM convidado where status=1 ORDER BY nome");

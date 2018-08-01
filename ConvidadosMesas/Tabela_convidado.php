@@ -96,7 +96,7 @@ if (isset($_POST["delete"])) {
                     $tabela = $convidado->findByNome($q);
                    
                     foreach ($tabela as $linha) {
-                        if($linha['status']==0){$x='Não Convirmado';} else {$x='Convirmado';}
+                        if($linha['status']==0){$x='Não Confirmado';} else {$x='Confirmado';}
                         echo '<tr>'
                         . '<td class="text-center">' 
                         . $linha['idconvidado']

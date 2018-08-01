@@ -16,6 +16,19 @@ class Montagem extends DAO {
         return $sql->fetchAll();
     }
     
+    
+    
+    public function findAllNaoContendo() {
+        $sql = $this->db->prepare("SELECT * FROM convidado e WHERE e.idconvidado NOT IN(SELECT mesaconvidado.idconvidado FROM mesaconvidado)");
+        $sql->execute();
+        return $sql->fetchAll();
+    }
+    
+    
+    
+    
+    
+    
 
     public function findByNome($q) {
         $sql = $this->db->prepare(
@@ -45,6 +58,34 @@ class Montagem extends DAO {
         $sql->execute([':cod' => $cod]);
         return $sql->fetch();
     }
+    
+     public function findByConv($idconvidado) {
+        $sql = $this->db->prepare("SELECT * "
+                . " FROM mesaconvidado"
+                . " WHERE idconvidado=:idconvidado");
+
+        $sql->execute([':idconvidado' => $idconvidado]);
+        return $sql->fetch();
+    }
+    
+    
+    public function findCountConvidado($idmesa) {
+        $sql = $this->db->prepare("select count(idconvidado) from mesaconvidado where idmesa = :idmesa"
+//                . " FROM mesaconvidado"
+//                . " WHERE idmontagem=:cod"
+                );
+
+       $sql->execute([':idmesa' => $idmesa]);
+       return  $sql->fetchColumn(0);
+       // return $sql->fetch;
+       
+         
+        
+    }
+    
+    
+    
+    
 
     public function insert($idmesa, $idconvidado) {
         $sql = $this->db->prepare("INSERT INTO mesaconvidado "

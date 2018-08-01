@@ -16,6 +16,16 @@ class Mesa extends DAO {
         return $sql->fetchAll();
     }
     
+    
+    public function findAllnumerodelugares() {
+        $sql = $this->db->prepare("SELECT numerodelugares FROM mesa");
+        $sql->execute();
+        return $sql;
+        //return $sql->fetchAll();
+    
+    }
+    
+    
 
     public function findById($q) {
         $sql = $this->db->prepare(
